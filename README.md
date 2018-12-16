@@ -16,10 +16,10 @@ The original tutorial is in [Here](https://towardsdatascience.com/evolution-of-a
 (2)We think it is better that our populations are big, so that we can have more choices.  
 (3)We think it is dangerous that MUTATION will destroy some good DNA,so we keep the MUTATION a low number.(In this experiment,we don't mutate at all).  
   
-##About the final distance:
+## About the final distance:
 The final distance may not the best answer(7544) all the time, you can try more strategies to improve the performance constantly.
 
-
+## The result shows here:
 ![](berlin52_route.png)  
   
 ![](berlin52_distance.png)  
