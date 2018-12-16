@@ -1,5 +1,5 @@
-#The BASE GA algorithm is here:
-#https://towardsdatascience.com/evolution-of-a-salesman-a-complete-genetic-algorithm-tutorial-for-python-6fe5d2b3ca35
+# The original GA algorithm is here:
+# https://towardsdatascience.com/evolution-of-a-salesman-a-complete-genetic-algorithm-tutorial-for-python-6fe5d2b3ca35
 
 import numpy as np, random, operator, pandas as pd, matplotlib.pyplot as plt
 import math
@@ -51,6 +51,7 @@ def createRoute(cityList):
     route = random.sample(cityList, len(cityList))
     return route
 
+
 def initialPopulation(popSize, cityList):
     population = []
 
@@ -58,11 +59,12 @@ def initialPopulation(popSize, cityList):
         population.append(createRoute(cityList))
     return population
 
+
 def rankRoutes(population):
     fitnessResults = {}
-    for i in range(0,len(population)):
+    for i in range(0, len(population)):
         fitnessResults[i] = Fitness(population[i]).routeFitness()
-    return sorted(fitnessResults.items(), key = operator.itemgetter(1), reverse = False)
+    return sorted(fitnessResults.items(), key=operator.itemgetter(1), reverse=False)
 
 
 def selection(popRanked, eliteSize):
@@ -147,6 +149,7 @@ def mutatePopulation(population, mutationRate):
         mutatedPop.append(mutatedInd)
     return mutatedPop
 
+
 def nextGeneration(currentGen, eliteSize, mutationRate):
     popRanked = rankRoutes(currentGen)
     selectionResults = selection(popRanked, eliteSize)
@@ -171,7 +174,7 @@ def geneticAlgorithm(population, popSize, eliteSize, mutationRate, generations):
 def plotting():
     l1 = list()
     for c in best:
-        l1.append([c.x,c.y])
+        l1.append([c.x, c.y])
     l = np.asarray(l1)
     plt.clf()
     plt.scatter(l[:, 0].T, l[:, 1].T, s=10, c='k')
@@ -180,6 +183,7 @@ def plotting():
     plt.plot(l[:, 0].T, l[:, 1].T, 'r-')
     # plt.show()
     plt.savefig("berlin52_route.png")
+
 
 def read_line(s):
     l = s.split(' ')
@@ -208,18 +212,12 @@ def geneticAlgorithmPlot(population, popSize, eliteSize, mutationRate, generatio
     bestRoute = pop[bestRouteIndex]
     return bestRoute
 
+
 cityList = []
 with open('./TSP_data', 'rt') as f:
     for line in f:
         a, b, c = read_line(line)
         cityList.append(City(x=b, y=c))
 
-
 best = geneticAlgorithmPlot(population=cityList, popSize=2000, eliteSize=1000, mutationRate=0.01, generations=2000)
 plotting()
-
-
-
-
-
-
